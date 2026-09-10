@@ -41,7 +41,6 @@ reportForm.addEventListener("submit", async function (e) {
                 type: type,
                 title: title,
                 category: category,
-                // date_lost_found: dateLostFound || null,
                 location: location,
                 description: description,
                 status: "active"
@@ -65,7 +64,12 @@ reportForm.addEventListener("submit", async function (e) {
         return;
     }
     console.log("Report successfully added:", data);
-    alert("🎉 Report successfully submitted!");
+    // alert("🎉 Report successfully submitted!");
+      Swal.fire({
+            icon: "success",
+            title: "Congrats!",
+            text: "🎉 Report successfully submitted!"
+        })
     reportForm.reset();
     if (submitButton) {
 

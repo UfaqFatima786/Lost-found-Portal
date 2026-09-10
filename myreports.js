@@ -286,10 +286,15 @@ async function editReport(id) {
     }
 
 
-    alert(
-        "✅ Report successfully updated!"
-    );
-
+    // alert(
+    //     "✅ Report successfully updated!"
+    // );
+    Swal.fire({
+        icon: "success",
+        title: "Congratulations!",
+        text: "Your report has been successfully updated!",
+        confirmButtonText: "OK"
+    });
     loadMyReports();
 }
 
