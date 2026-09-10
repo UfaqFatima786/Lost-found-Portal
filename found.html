@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Found Items | FindIt</title>
+     <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwEST8ITQwzOyunwd2fArjfs2EZUGL2T1b_hKBZYNfRw&s=10"
+        type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="found.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">
+                    <i class="bi bi-search-heart"></i>
+                </span>
+                <span>
+                    Find<span class="logo-highlight">It</span>
+                </span>
+            </a>
+            <nav class="nav-links">
+                <a href="Portal.html">
+                    Home
+                </a>
+                <a href="lost.html">
+                    Lost Items
+                </a>
+                <a href="found.html" class="active">
+                    Found Items
+                </a>
+                <a href="report.html">
+                    Report Item
+                </a>
+                <a href="my-reports.html">
+                    My Reports
+                </a>
+            </nav>
+            <div class="nav-actions">
+               <a href="login.html" id="mobileLoginBtn">
+            <i class="bi bi-person"></i>
+            Login
+        </a>
+                <a href="report.html?type=found" class="nav-found-btn">
+                    <i class="bi bi-plus-lg"></i>
+                    Report Found
+                </a>
+            </div>
+            <button class="menu-btn" id="menuBtn">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+    </header>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="Portal.html">
+            <i class="bi bi-house"></i>
+            Home
+        </a>
+        <a href="lost.html">
+            <i class="bi bi-search"></i>
+            Lost Items
+        </a>
+        <a href="found.html">
+            <i class="bi bi-check-circle"></i>
+            Found Items
+        </a>
+        <a href="report.html">
+            <i class="bi bi-plus-circle"></i>
+            Report Item
+        </a>
+        <a href="my-reports.html">
+            <i class="bi bi-file-earmark-text"></i>
+            My Reports
+        </a>
+        <a href="login.html">
+            <i class="bi bi-person"></i>
+            Login
+        </a>
+    </div>
+    <section class="found-hero">
+        <div class="container">
+            <div class="found-hero-content">
+                <span class="page-badge">
+                    <i class="bi bi-check-circle"></i>
+                    Found Items
+                </span>
+                <h1>
+                    Someone Found It.
+                    <span>Maybe It's Yours.</span>
+                </h1>
+                <p>
+                    Browse items that have been found and reported
+                    by people in the community.
+                </p>
+                <a href="report.html?type=found" class="hero-found-btn">
+                    <i class="bi bi-plus-circle"></i>
+                    Report a Found Item
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="found-filter-section">
+        <div class="container">
+            <div class="filter-box">
+                <div class="filter-search">
+                    <i class="bi bi-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search found items...">
+                </div>
+                <div class="filter-select">
+                    <i class="bi bi-grid"></i>
+                    <select id="categoryFilter">
+                        <option value="all">
+                            All Categories
+                        </option>
+                        <option value="electronics">
+                            Electronics
+                        </option>
+                        <option value="wallet">
+                            Wallet & Cards
+                        </option>
+                        <option value="bags">
+                            Bags
+                        </option>
+                        <option value="keys">
+                            Keys
+                        </option>
+                        <option value="documents">
+                            Documents
+                        </option>
+                        <option value="jewelry">
+                            Jewelry
+                        </option>
+                        <option value="clothing">
+                            Clothing
+                        </option>
+                        <option value="other">
+                            Other
+                        </option>
+                    </select>
+                </div>
+                <div class="filter-search">
+                    <i class="bi bi-geo-alt"></i>
+                    <input type="text" id="locationFilter" placeholder="Location...">
+                </div>
+                <button class="filter-btn" id="searchBtn">
+                    <i class="bi bi-search"></i>
+                    Search
+                </button>
+            </div>
+        </div>
+    </section>
+    <main class="found-items-section">
+        <div class="container">
+            <div class="items-header">
+                <div>
+                    <span class="small-heading found-heading">
+                        RECENT REPORTS
+                    </span>
+                    <h2>
+                        Found Items
+                    </h2>
+                    <p>
+                        Browse recently reported found belongings.
+                    </p>
+                </div>
+                <div class="items-count">
+                    <span id="foundCount">
+                        0
+                    </span>
+                    <small>
+                        Items Found
+                    </small>
+                </div>
+            </div>
+            <div class="found-items-grid" id="foundItems">
+
+                <!--
+                    Supabase records will appear here.
+
+                    JavaScript will fetch:
+
+                    type = "found"
+
+                    and create cards inside
+                    this container.
+                -->
+                <div class="found-empty-state" id="emptyState">
+
+                    <div class="empty-state-icon">
+
+                        <i class="bi bi-box-seam"></i>
+
+                    </div>
+
+
+                    <h3>
+                        No Found Items Yet
+                    </h3>
+
+
+                    <p>
+                        There are currently no found items
+                        matching your search.
+                    </p>
+
+
+                    <a href="report.html?type=found" class="empty-report-btn">
+
+                        <i class="bi bi-plus-circle"></i>
+
+                        Report Found Item
+
+                    </a>
+
+                </div>
+
+            </div>
+            <div class="loading-state" id="loadingState">
+
+                <div class="loading-spinner"></div>
+
+                <p>
+                    Loading found items...
+                </p>
+
+            </div>
+            <div class="pagination" id="pagination">
+                <button class="page-btn disabled" id="prevBtn">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+                <button class="page-btn active">
+                    1
+                </button>
+                <button class="page-btn">
+                    2
+                </button>
+                <button class="page-btn">
+                    3
+                </button>
+                <button class="page-btn" id="nextBtn">
+
+                    <i class="bi bi-chevron-right"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+    <section class="found-cta">
+        <div class="container">
+            <div class="found-cta-content">
+                <div class="cta-icon">
+                    <i class="bi bi-heart-fill"></i>
+                </div>
+                <h2>
+                    Found Something?
+                </h2>
+                <p>
+                    Report it here and help its owner
+                    get their belongings back.
+                </p>
+                <a href="report.html?type=found" class="cta-found-btn">
+                    <i class="bi bi-plus-circle"></i>
+                    Report Found Item
+                </a>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">
+                        <i class="bi bi-search-heart"></i>
+                    </span>
+                    <span>
+                        Find<span class="logo-highlight">It</span>
+                    </span>
+                </a>
+                <p>
+                    A simple way to report, search and reconnect
+                    lost belongings with their owners.
+                </p>
+            </div>
+            <div class="footer-links">
+                <div>
+                    <h4>
+                        Explore
+                    </h4>
+                    <a href="lost.html">
+                        Lost Items
+                    </a>
+                    <a href="found.html">
+                        Found Items
+                    </a>
+                    <a href="report.html">
+                        Report Item
+                    </a>
+                </div>
+                <div>
+                    <h4>
+                        Account
+                    </h4>
+                    <a href="login.html">
+                        Login
+                    </a>
+                    <a href="signup.html">
+                        Create Account
+                    </a>
+                    <a href="my-reports.html">
+                        My Reports
+                    </a>
+                </div>
+                <div>
+                    <h4>
+                        FindIt
+                    </h4>
+                    <a href="index.html">
+                        Home
+                    </a>
+                    <a href="#">
+                        About
+                    </a>
+                    <a href="#">
+                        Contact
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 FindIt. Built with ❤️ for a better community.
+            </p>
+
+        </div>
+
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+    <script src="found.js"></script>
+    <script src="auth-nav.js"></script>
+</body>
+
+</html>
