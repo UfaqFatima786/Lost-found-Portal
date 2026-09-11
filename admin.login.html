@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login | Lost & Found Portal</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="admin-login.css">
+</head>
+
+<body>
+
+    <div class="login-wrapper">
+
+        <div class="login-card">
+
+            <div class="admin-icon">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+
+            <span class="login-label">ADMIN PORTAL</span>
+
+            <h1>Welcome Back</h1>
+
+            <p class="login-description">
+                Login to manage Lost & Found Portal reports and users.
+            </p>
+
+            <form id="adminLoginForm">
+
+                <div class="input-group">
+
+                    <label for="adminEmail">
+                        Email Address
+                    </label>
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <input
+                            type="email"
+                            id="adminEmail"
+                            placeholder="admin@example.com"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label for="adminPassword">
+                        Password
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            id="adminPassword"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            id="togglePassword"
+                            class="password-toggle"
+                        >
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <button type="submit" class="login-btn" id="loginBtn">
+
+                    <i class="fa-solid fa-right-to-bracket"></i>
+
+                    Login as Admin
+
+                </button>
+
+            </form>
+
+            <a href="index.html" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Portal
+            </a>
+
+        </div>
+
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+    <script  src="admin-login.js"></script>
+<script src="auth-nav.js"></script>
+</body>
+</html>
+

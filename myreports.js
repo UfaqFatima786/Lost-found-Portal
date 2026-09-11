@@ -97,7 +97,6 @@ async function loadMyReports() {
         }
         card.innerHTML = `
             <div class="report-image">
-                <!-- LOST / FOUND BADGE -->
                 <div class="report-type ${
                     item.type === "lost"
                         ? "lost-type"

@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | Lost & Found</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="admin-dashboard.css">
+
+</head>
+
+
+<body>
+
+    <div class="admin-layout">
+
+
+        <!-- ==========================================
+             SIDEBAR
+        ========================================== -->
+
+        <nav class="sidebar-menu">
+
+            <a
+                href="#"
+                class="nav-link active"
+                data-section="dashboard"
+            >
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+
+
+            <a
+                href="#"
+                class="nav-link"
+                data-section="reports"
+            >
+                <i class="fa-solid fa-file-lines"></i>
+                <span>Reports</span>
+            </a>
+
+
+            <a
+                href="#"
+                class="nav-link"
+                data-section="users"
+            >
+                <i class="fa-solid fa-users"></i>
+                <span>Users</span>
+            </a>
+
+
+            <a
+                href="#"
+                class="nav-link"
+                data-section="lost"
+            >
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span>Lost Items</span>
+            </a>
+
+
+            <a
+                href="#"
+                class="nav-link"
+                data-section="found"
+            >
+                <i class="fa-solid fa-box-open"></i>
+                <span>Found Items</span>
+            </a>
+
+
+            <a
+                href="#"
+                class="nav-link"
+                data-section="resolved"
+            >
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Resolved</span>
+            </a>
+
+        </nav>
+
+
+
+        <!-- ==========================================
+             MAIN CONTENT
+        ========================================== -->
+
+        <main class="main-content">
+
+
+            <!-- TOPBAR -->
+
+            <header class="topbar">
+
+                <div class="mobile-brand">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    Lost & Found
+
+                </div>
+
+
+                <div class="admin-profile">
+
+                    <div class="profile-avatar">
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong id="adminName">
+                            Admin
+                        </strong>
+
+                        <small>
+                            Administrator
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+
+            <!-- ==========================================
+                 DASHBOARD SECTION
+            ========================================== -->
+
+            <section
+                id="dashboardSection"
+                class="admin-section dashboard"
+            >
+
+
+                <!-- WELCOME -->
+
+                <div class="welcome">
+
+                    <div>
+
+                        <span>
+                            ADMIN DASHBOARD
+                        </span>
+
+
+                        <h1>
+
+                            Welcome back,
+
+                            <span id="welcomeName">
+                                Admin
+                            </span>
+
+                            👋
+
+                        </h1>
+
+
+                        <p>
+                            Here's what's happening with your
+                            Lost & Found Portal.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ==========================================
+                     STATISTICS
+                ========================================== -->
+
+                <div class="stats-grid">
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon total">
+
+                            <i class="fa-solid fa-layer-group"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Total Reports
+                            </span>
+
+                            <h2 id="totalReports">
+                                0
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon lost">
+
+                            <i class="fa-solid fa-circle-exclamation"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Lost Items
+                            </span>
+
+                            <h2 id="lostItems">
+                                0
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon found">
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Found Items
+                            </span>
+
+                            <h2 id="foundItems">
+                                0
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon resolved">
+
+                            <i class="fa-solid fa-handshake"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Resolved
+                            </span>
+
+                            <h2 id="resolvedItems">
+                                0
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- ==========================================
+                     DASHBOARD CONTENT
+                ========================================== -->
+
+                <div class="content-grid">
+
+
+                    <!-- RECENT REPORTS -->
+
+                    <div class="reports-card">
+
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span>
+                                    REPORT MANAGEMENT
+                                </span>
+
+                                <h2>
+                                    Recent Reports
+                                </h2>
+
+                            </div>
+
+
+                            <button id="viewAllReportsBtn">
+
+                                View All
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </button>
+
+                        </div>
+
+
+
+                        <div class="table-wrapper">
+
+                            <table>
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Report
+                                        </th>
+
+                                        <th>
+                                            Category
+                                        </th>
+
+                                        <th>
+                                            Type
+                                        </th>
+
+                                        <th>
+                                            Status
+                                        </th>
+
+                                        <th>
+                                            Action
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+
+                                <tbody id="reportsTable">
+
+                                    <tr>
+
+                                        <td
+                                            colspan="5"
+                                            class="empty"
+                                        >
+                                            No reports found.
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ==========================================
+                         QUICK ACTIONS
+                    ========================================== -->
+
+                    <div class="quick-card">
+
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span>
+                                    QUICK ACTIONS
+                                </span>
+
+                                <h2>
+                                    Manage Portal
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="quick-actions">
+
+
+                            <button id="allReportsBtn">
+
+                                <i class="fa-solid fa-file-lines"></i>
+
+                                <div>
+
+                                    <strong>
+                                        All Reports
+                                    </strong>
+
+                                    <small>
+                                        Manage submitted reports
+                                    </small>
+
+                                </div>
+
+                            </button>
+
+
+
+                            <button id="usersBtn">
+
+                                <i class="fa-solid fa-users"></i>
+
+                                <div>
+
+                                    <strong>
+                                        Users
+                                    </strong>
+
+                                    <small>
+                                        Manage registered users
+                                    </small>
+
+                                </div>
+
+                            </button>
+
+
+
+                            <button id="resolvedBtn">
+
+                                <i class="fa-solid fa-circle-check"></i>
+
+                                <div>
+
+                                    <strong>
+                                        Resolved Items
+                                    </strong>
+
+                                    <small>
+                                        View recovered items
+                                    </small>
+
+                                </div>
+
+                            </button>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ==========================================
+                 REPORTS SECTION
+            ========================================== -->
+
+            <section
+                id="reportsSection"
+                class="admin-section"
+                style="display: none;"
+            >
+
+                <div class="section-header">
+
+                    <div>
+
+                        <span>
+                            REPORT MANAGEMENT
+                        </span>
+
+                        <h1>
+                            All Reports
+                        </h1>
+
+                        <p>
+                            Manage all submitted lost and found reports.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="reports-card">
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Report
+                                    </th>
+
+                                    <th>
+                                        Category
+                                    </th>
+
+                                    <th>
+                                        Type
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                    <th>
+                                        Action
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="allReportsTable">
+
+                                <tr>
+
+                                    <td
+                                        colspan="5"
+                                        class="empty"
+                                    >
+                                        Loading reports...
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ==========================================
+                 USERS SECTION
+            ========================================== -->
+
+            <section
+                id="usersSection"
+                class="admin-section"
+                style="display: none;"
+            >
+
+                <div class="section-header">
+
+                    <div>
+
+                        <span>
+                            USER MANAGEMENT
+                        </span>
+
+                        <h1>
+                            Registered Users
+                        </h1>
+
+                        <p>
+                            View users registered on the portal.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="reports-card">
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Name
+                                    </th>
+
+                                    <th>
+                                        Email
+                                    </th>
+
+                                    <th>
+                                        Role
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="usersTable">
+
+                                <tr>
+
+                                    <td
+                                        colspan="3"
+                                        class="empty"
+                                    >
+                                        Loading users...
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ==========================================
+                 LOST ITEMS SECTION
+            ========================================== -->
+
+            <section
+                id="lostSection"
+                class="admin-section"
+                style="display: none;"
+            >
+
+                <div class="section-header">
+
+                    <div>
+
+                        <span>
+                            LOST ITEMS
+                        </span>
+
+                        <h1>
+                            Lost Items
+                        </h1>
+
+                        <p>
+                            All reports submitted as lost items.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="reports-card">
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Report
+                                    </th>
+
+                                    <th>
+                                        Category
+                                    </th>
+
+                                    <th>
+                                        Type
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                    <th>
+                                        Action
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="lostTable">
+
+                                <tr>
+
+                                    <td
+                                        colspan="5"
+                                        class="empty"
+                                    >
+                                        Loading lost items...
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ==========================================
+                 FOUND ITEMS SECTION
+            ========================================== -->
+
+            <section
+                id="foundSection"
+                class="admin-section"
+                style="display: none;"
+            >
+
+                <div class="section-header">
+
+                    <div>
+
+                        <span>
+                            FOUND ITEMS
+                        </span>
+
+                        <h1>
+                            Found Items
+                        </h1>
+
+                        <p>
+                            All reports submitted as found items.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="reports-card">
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Report
+                                    </th>
+
+                                    <th>
+                                        Category
+                                    </th>
+
+                                    <th>
+                                        Type
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                    <th>
+                                        Action
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="foundTable">
+
+                                <tr>
+
+                                    <td
+                                        colspan="5"
+                                        class="empty"
+                                    >
+                                        Loading found items...
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ==========================================
+                 RESOLVED SECTION
+            ========================================== -->
+
+            <section
+                id="resolvedSection"
+                class="admin-section"
+                style="display: none;"
+            >
+
+                <div class="section-header">
+
+                    <div>
+
+                        <span>
+                            RESOLVED REPORTS
+                        </span>
+
+                        <h1>
+                            Resolved Items
+                        </h1>
+
+                        <p>
+                            Reports that have been successfully resolved.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="reports-card">
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Report
+                                    </th>
+
+                                    <th>
+                                        Category
+                                    </th>
+
+                                    <th>
+                                        Type
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                    <th>
+                                        Action
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="resolvedTable">
+
+                                <tr>
+
+                                    <td
+                                        colspan="5"
+                                        class="empty"
+                                    >
+                                        Loading resolved items...
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="supabase.js"></script>
+
+    <script src="admin-dashboard.js"></script>
+
+
+</body>
+
+</html>
