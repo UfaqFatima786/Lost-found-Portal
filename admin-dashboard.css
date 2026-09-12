@@ -266,28 +266,18 @@ a {
     color: var(--red);
 }
 
-
-/* =========================================
-   MAIN CONTENT
-========================================= */
-
 .main-content {
     width: calc(100% - 250px);
 
-    margin-left: 250px;
+    margin-left: 100px;
 
     min-height: 100vh;
 }
 
-
-/* =========================================
-   TOPBAR
-========================================= */
-
 .topbar {
     height: 75px;
-
-    background: rgba(255, 255, 255, 0.95);
+border-radius: 10px;
+    background: rgba(69, 40, 197, 0.651);
 
     border-bottom: 1px solid var(--border);
 
@@ -307,9 +297,6 @@ a {
 
     /* backdrop-filter: blur(15px); */
 }
-/* =========================
-   SIDEBAR ONLY
-========================= */
 
 .sidebar {
     background: var(--white);
@@ -318,12 +305,12 @@ a {
 }
 
 
-/* Sidebar Menu */
-
 .sidebar-menu {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 20px;
+    margin-top: 100px;
+    padding-left: 20px;
 }
 
 
@@ -332,7 +319,7 @@ a {
 .sidebar-menu .nav-link {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 20px;
 
     padding: 13px 16px;
 
