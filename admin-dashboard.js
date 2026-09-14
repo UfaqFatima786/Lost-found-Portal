@@ -1,5 +1,5 @@
 // ==========================================
-// ADMIN DASHBOARD
+// FINDIT - ADMIN DASHBOARD
 // ==========================================
 
 
@@ -28,12 +28,9 @@ const adminName =
 const welcomeName =
     document.getElementById("welcomeName");
 
-const logoutBtn =
-    document.getElementById("logoutBtn");
-
 
 // ==========================================
-// SECTION ELEMENTS
+// SECTIONS
 // ==========================================
 
 const dashboardSection =
@@ -64,13 +61,12 @@ async function checkAdmin() {
     try {
 
         const {
-            data: {
-                user
-            }
+            data: { user },
+            error: userError
         } = await supabaseClient.auth.getUser();
 
 
-        if (!user) {
+        if (userError || !user) {
 
             window.location.href =
                 "admin-login.html";
@@ -81,7 +77,7 @@ async function checkAdmin() {
 
         const {
             data: profile,
-            error
+            error: profileError
         } = await supabaseClient
             .from("profiles")
             .select("id, full_name, email, role")
@@ -89,14 +85,20 @@ async function checkAdmin() {
             .single();
 
 
-        if (error) {
+        if (profileError) {
+            throw profileError;
+        }
 
-            console.error(
-                "Profile error:",
-                error
-            );
+
+        if (!profile || profile.role !== "admin") {
 
             await supabaseClient.auth.signOut();
+
+            await Swal.fire({
+                icon: "error",
+                title: "Access Denied",
+                text: "Admin account required."
+            });
 
             window.location.href =
                 "admin-login.html";
@@ -104,63 +106,18 @@ async function checkAdmin() {
             return false;
         }
 
-
-        // ==========================================
-        // ADMIN ROLE CHECK
-        // ==========================================
-
-        if (profile.role !== "admin") {
-
-            await supabaseClient.auth.signOut();
-
-
-            if (typeof Swal !== "undefined") {
-
-                await Swal.fire({
-                    icon: "error",
-                    title: "Access Denied",
-                    text: "Admin account required."
-                });
-
-            } else {
-
-                alert(
-                    "Access denied. Admin account required."
-                );
-
-            }
-
-
-            window.location.href =
-                "admin-login.html";
-
-            return false;
-        }
-
-
-        // ==========================================
-        // ADMIN NAME
-        // ==========================================
 
         const name =
-            profile.full_name ||
-            profile.email?.split("@")[0] ||
-            "Admin";
+            profile.full_name || "Admin";
 
 
         if (adminName) {
-
-            adminName.textContent =
-                name;
-
+            adminName.textContent = name;
         }
 
 
         if (welcomeName) {
-
-            welcomeName.textContent =
-                name;
-
+            welcomeName.textContent = name;
         }
 
 
@@ -170,20 +127,65 @@ async function checkAdmin() {
     } catch (error) {
 
         console.error(
-            "Admin check error:",
+            "Admin Check Error:",
             error
         );
-
 
         window.location.href =
             "admin-login.html";
 
         return false;
-
     }
-
 }
 
+
+// ==========================================
+// GET REPORT TYPE
+// ==========================================
+
+function getReportType(report) {
+
+    return String(
+        report.type ||
+        report.report_type ||
+        report.status_type ||
+        ""
+    )
+        .toLowerCase()
+        .trim();
+}
+
+
+// ==========================================
+// GET REPORT STATUS
+// ==========================================
+
+function getReportStatus(report) {
+
+    return String(
+        report.status || ""
+    )
+        .toLowerCase()
+        .trim();
+}
+
+
+// ==========================================
+// CHECK RESOLVED
+// ==========================================
+
+function isResolved(report) {
+
+    const status =
+        getReportStatus(report);
+
+    return [
+        "resolved",
+        "recovered",
+        "complete",
+        "completed"
+    ].includes(status);
+}
 
 
 // ==========================================
@@ -206,12 +208,6 @@ async function loadDashboard() {
 
 
         if (error) {
-
-            console.error(
-                "Reports error:",
-                error
-            );
-
             throw error;
         }
 
@@ -220,131 +216,253 @@ async function loadDashboard() {
             reports || [];
 
 
-        // ==========================================
-        // TOTAL REPORTS
-        // ==========================================
+        // -------------------------------
+        // COUNTS
+        // -------------------------------
 
-        totalReports.textContent =
+        const total =
             allReports.length;
 
 
-        // ==========================================
-        // LOST COUNT
-        // ==========================================
-
-        const lostCount =
-            allReports.filter(report => {
-
-                const type =
-                    String(
-                        report.type ||
-                        report.report_type ||
-                        report.status_type ||
-                        ""
-                    ).toLowerCase();
+        const lost =
+            allReports.filter(report =>
+                getReportType(report) === "lost"
+            ).length;
 
 
-                return type === "lost";
-
-            }).length;
-
-
-        lostItems.textContent =
-            lostCount;
+        const found =
+            allReports.filter(report =>
+                getReportType(report) === "found"
+            ).length;
 
 
-        // ==========================================
-        // FOUND COUNT
-        // ==========================================
-
-        const foundCount =
-            allReports.filter(report => {
-
-                const type =
-                    String(
-                        report.type ||
-                        report.report_type ||
-                        report.status_type ||
-                        ""
-                    ).toLowerCase();
+        const resolved =
+            allReports.filter(report =>
+                isResolved(report)
+            ).length;
 
 
-                return type === "found";
-
-            }).length;
-
-
-        foundItems.textContent =
-            foundCount;
+        if (totalReports) {
+            totalReports.textContent = total;
+        }
 
 
-        // ==========================================
-        // RESOLVED COUNT
-        // ==========================================
-
-        const resolvedCount =
-            allReports.filter(report => {
-
-                return isResolved(report);
-
-            }).length;
+        if (lostItems) {
+            lostItems.textContent = lost;
+        }
 
 
-        resolvedItems.textContent =
-            resolvedCount;
+        if (foundItems) {
+            foundItems.textContent = found;
+        }
 
 
-        // ==========================================
+        if (resolvedItems) {
+            resolvedItems.textContent = resolved;
+        }
+
+
+        // -------------------------------
         // RECENT REPORTS
-        // ==========================================
+        // -------------------------------
 
         displayReports(
-            allReports.slice(0, 8)
+            allReports.slice(0, 8),
+            reportsTable
         );
 
 
     } catch (error) {
 
         console.error(
-            "Dashboard error:",
+            "Dashboard Error:",
             error
         );
 
-
-        if (reportsTable) {
-
-            reportsTable.innerHTML = `
-                <tr>
-                    <td colspan="5" class="empty">
-                        Unable to load reports.
-                    </td>
-                </tr>
-            `;
-
-        }
-
     }
-
 }
 
 
+// ==========================================
+// CREATE REPORT ROW
+// ==========================================
+
+function createReportRow(report) {
+
+    const id =
+        report.id;
+
+
+    const title =
+        report.title ||
+        report.item ||
+        report.item_name ||
+        "Unknown Item";
+
+
+    const category =
+        report.category ||
+        "Other";
+
+
+    const type =
+        getReportType(report);
+
+
+    const status =
+        getReportStatus(report);
+
+
+    // --------------------------------------
+    // TYPE
+    // --------------------------------------
+
+    let typeHTML = "";
+
+    if (type === "lost") {
+
+        typeHTML = `
+            <span class="report-type lost">
+                Lost
+            </span>
+        `;
+
+    } else {
+
+        typeHTML = `
+            <span class="report-type found">
+                Found
+            </span>
+        `;
+    }
+
+
+    // --------------------------------------
+    // STATUS
+    // --------------------------------------
+
+    let statusHTML = "";
+
+    if (isResolved(report)) {
+
+        statusHTML = `
+            <span class="report-status resolved">
+                <i class="fa-solid fa-circle-check"></i>
+                Resolved
+            </span>
+        `;
+
+    } else {
+
+        statusHTML = `
+            <span class="report-status active">
+                <i class="fa-solid fa-circle"></i>
+                Active
+            </span>
+        `;
+    }
+
+
+    // --------------------------------------
+    // ACTION
+    // --------------------------------------
+
+    let actionHTML = "";
+
+    if (isResolved(report)) {
+
+        actionHTML = `
+            <button
+                class="view-btn"
+                onclick="viewReport(${id})"
+            >
+                <i class="fa-solid fa-eye"></i>
+                View
+            </button>
+        `;
+
+    } else {
+
+        actionHTML = `
+            <div class="report-actions">
+
+                <button
+                    class="view-btn"
+                    onclick="viewReport(${id})"
+                >
+                    <i class="fa-solid fa-eye"></i>
+                    View
+                </button>
+
+                <button
+                    class="resolve-btn"
+                    onclick="markAsResolved(${id})"
+                >
+                    <i class="fa-solid fa-circle-check"></i>
+                    Resolve
+                </button>
+
+            </div>
+        `;
+    }
+
+
+    // --------------------------------------
+    // REPORT ROW
+    // --------------------------------------
+
+    return `
+        <tr>
+
+            <td>
+                <strong>
+                    ${escapeHTML(title)}
+                </strong>
+            </td>
+
+            <td>
+                ${escapeHTML(category)}
+            </td>
+
+            <td>
+                ${typeHTML}
+            </td>
+
+            <td>
+                ${statusHTML}
+            </td>
+
+            <td>
+                ${actionHTML}
+            </td>
+
+        </tr>
+    `;
+}
+
 
 // ==========================================
-// DISPLAY RECENT REPORTS
+// DISPLAY REPORTS
 // ==========================================
 
-function displayReports(reports) {
+function displayReports(
+    reports,
+    table
+) {
 
-    if (!reportsTable) {
+    if (!table) {
         return;
     }
 
 
-    if (!reports.length) {
+    if (!reports || reports.length === 0) {
 
-        reportsTable.innerHTML = `
+        table.innerHTML = `
             <tr>
-                <td colspan="5" class="empty">
+                <td
+                    colspan="5"
+                    class="empty"
+                >
                     No reports found.
                 </td>
             </tr>
@@ -354,249 +472,139 @@ function displayReports(reports) {
     }
 
 
-    reportsTable.innerHTML =
-        reports.map(report => {
-
-            return createReportRow(report);
-
-        }).join("");
-
+    table.innerHTML =
+        reports
+            .map(report =>
+                createReportRow(report)
+            )
+            .join("");
 }
 
 
-
 // ==========================================
-// CREATE REPORT ROW
+// MARK AS RESOLVED
 // ==========================================
 
-function createReportRow(report) {
+window.markAsResolved = async function(id) {
+
+    try {
+
+        // ----------------------------------
+        // CONFIRM
+        // ----------------------------------
+
+        const result =
+            await Swal.fire({
+
+                icon: "question",
+
+                title: "Mark as Resolved?",
+
+                text:
+                    "Are you sure this item has been successfully resolved?",
+
+                showCancelButton: true,
+
+                confirmButtonText:
+                    "Yes, Resolve It",
+
+                cancelButtonText:
+                    "Cancel",
+
+                reverseButtons: true
+
+            });
 
 
-    // ==========================================
-    // TITLE
-    // ==========================================
-
-    const title =
-        report.title ||
-        report.item ||
-        report.item_name ||
-        "Unnamed Item";
+        if (!result.isConfirmed) {
+            return;
+        }
 
 
-    // ==========================================
-    // CATEGORY
-    // ==========================================
+        // ----------------------------------
+        // UPDATE SUPABASE
+        // ----------------------------------
 
-    const category =
-        report.category ||
-        "General";
-
-
-    // ==========================================
-    // TYPE
-    // ==========================================
-
-    const rawType =
-        String(
-            report.type ||
-            report.report_type ||
-            report.status_type ||
-            ""
-        ).toLowerCase();
+        const {
+            error
+        } = await supabaseClient
+            .from("lost and found")
+            .update({
+                status: "resolved"
+            })
+            .eq("id", id);
 
 
-    const type =
-        rawType === "found"
-            ? "Found"
-            : "Lost";
+        if (error) {
+            throw error;
+        }
 
 
-    const typeClass =
-        type === "Found"
-            ? "type-found"
-            : "type-lost";
+        // ----------------------------------
+        // SUCCESS
+        // ----------------------------------
+
+        await Swal.fire({
+
+            icon: "success",
+
+            title: "Resolved!",
+
+            text:
+                "The report has been marked as resolved.",
+
+            timer: 1600,
+
+            showConfirmButton: false
+
+        });
 
 
-    // ==========================================
-    // STATUS
-    // ==========================================
+        // ----------------------------------
+        // REFRESH DASHBOARD
+        // ----------------------------------
 
-    const rawStatus =
-        String(
-            report.status ||
-            report.report_status ||
-            "Pending"
-        ).toLowerCase();
+        await loadDashboard();
 
 
-    let statusText =
-        "Pending";
+        // ----------------------------------
+        // REFRESH RESOLVED SECTION
+        // ----------------------------------
 
-    let statusClass =
-        "status-pending";
+        if (
+            resolvedSection &&
+            resolvedSection.style.display !== "none"
+        ) {
+
+            await loadFilteredReports(
+                "resolved"
+            );
+
+        }
 
 
-    if (isResolved(report)) {
+    } catch (error) {
 
-        statusText =
-            "Resolved";
+        console.error(
+            "Resolve Error:",
+            error
+        );
 
-        statusClass =
-            "status-resolved";
 
-    } else if (rawStatus) {
+        Swal.fire({
 
-        statusText =
-            capitalize(rawStatus);
+            icon: "error",
 
-        statusClass =
-            "status-default";
+            title: "Update Failed",
+
+            text:
+                error.message ||
+                "Could not mark this report as resolved."
+
+        });
 
     }
-
-
-    // ==========================================
-    // IMAGE
-    // ==========================================
-
-    const image =
-        report["img-url"] ||
-        report.imgurl ||
-        report.image_url ||
-        report.image ||
-        "";
-
-
-    const imageHTML =
-        image
-            ? `
-                <img
-                    src="${escapeHTML(image)}"
-                    class="report-image"
-                    alt="Item"
-                    onerror="
-                        this.src =
-                        'https://placehold.co/80x80?text=Item'
-                    "
-                >
-            `
-            : `
-                <div
-                    class="report-image"
-                    style="
-                        display:grid;
-                        place-items:center;
-                        color:#635bff;
-                    "
-                >
-                    <i class="fa-solid fa-image"></i>
-                </div>
-            `;
-
-
-    return `
-
-        <tr>
-
-            <td>
-
-                <div class="report-name">
-
-                    ${imageHTML}
-
-                    <div>
-
-                        <strong
-                            title="${escapeHTML(title)}"
-                        >
-                            ${escapeHTML(title)}
-                        </strong>
-
-                        <small>
-                            ID #${report.id}
-                        </small>
-
-                    </div>
-
-                </div>
-
-            </td>
-
-
-            <td>
-                ${escapeHTML(category)}
-            </td>
-
-
-            <td>
-
-                <span class="
-                    type-badge
-                    ${typeClass}
-                ">
-                    ${type}
-                </span>
-
-            </td>
-
-
-            <td>
-
-                <span class="
-                    status-badge
-                    ${statusClass}
-                ">
-                    ${statusText}
-                </span>
-
-            </td>
-
-
-            <td>
-
-                <button
-                    class="action-btn"
-                    onclick="viewReport(${report.id})"
-                    title="View Report"
-                >
-
-                    <i class="fa-solid fa-eye"></i>
-
-                </button>
-
-            </td>
-
-        </tr>
-
-    `;
-
-}
-
-
-
-// ==========================================
-// CHECK RESOLVED
-// ==========================================
-
-function isResolved(report) {
-
-    const status =
-        String(
-            report.status ||
-            report.report_status ||
-            ""
-        ).toLowerCase();
-
-
-    return (
-        status === "resolved" ||
-        status === "recovered" ||
-        status === "complete" ||
-        status === "completed"
-    );
-
-}
-
+};
 
 
 // ==========================================
@@ -605,18 +613,15 @@ function isResolved(report) {
 
 function showSection(sectionName) {
 
-
-    // ==========================================
-    // HIDE ALL SECTIONS
-    // ==========================================
-
     const sections = [
+
         dashboardSection,
         reportsSection,
         usersSection,
         lostSection,
         foundSection,
         resolvedSection
+
     ];
 
 
@@ -631,10 +636,6 @@ function showSection(sectionName) {
 
     });
 
-
-    // ==========================================
-    // SHOW SELECTED SECTION
-    // ==========================================
 
     const sectionMap = {
 
@@ -671,9 +672,9 @@ function showSection(sectionName) {
     }
 
 
-    // ==========================================
-    // ACTIVE SIDEBAR
-    // ==========================================
+    // --------------------------------------
+    // SIDEBAR ACTIVE
+    // --------------------------------------
 
     document
         .querySelectorAll(".nav-link")
@@ -683,27 +684,24 @@ function showSection(sectionName) {
                 "active"
             );
 
+
+            if (
+                link.dataset.section ===
+                sectionName
+            ) {
+
+                link.classList.add(
+                    "active"
+                );
+
+            }
+
         });
 
 
-    const activeLink =
-        document.querySelector(
-            `.nav-link[data-section="${sectionName}"]`
-        );
-
-
-    if (activeLink) {
-
-        activeLink.classList.add(
-            "active"
-        );
-
-    }
-
-
-    // ==========================================
-    // LOAD DATA
-    // ==========================================
+    // --------------------------------------
+    // LOAD SECTION
+    // --------------------------------------
 
     if (sectionName === "reports") {
 
@@ -742,34 +740,36 @@ function showSection(sectionName) {
 }
 
 
-
 // ==========================================
-// SIDEBAR NAVIGATION
+// SIDEBAR CLICK
 // ==========================================
 
 document
     .querySelectorAll(".nav-link")
     .forEach(link => {
 
-
         link.addEventListener(
             "click",
-            function (e) {
+            function(e) {
 
                 e.preventDefault();
-
 
                 const section =
                     this.dataset.section;
 
 
-                showSection(section);
+                if (section) {
+
+                    showSection(
+                        section
+                    );
+
+                }
 
             }
         );
 
     });
-
 
 
 // ==========================================
@@ -789,15 +789,6 @@ async function loadAllReports() {
     }
 
 
-    table.innerHTML = `
-        <tr>
-            <td colspan="5" class="empty">
-                Loading reports...
-            </td>
-        </tr>
-    `;
-
-
     try {
 
         const {
@@ -816,7 +807,7 @@ async function loadAllReports() {
         }
 
 
-        displayReportsInTable(
+        displayReports(
             reports || [],
             table
         );
@@ -825,77 +816,58 @@ async function loadAllReports() {
     } catch (error) {
 
         console.error(
-            "All reports error:",
+            "Reports Error:",
             error
         );
 
-
-        table.innerHTML = `
-            <tr>
-                <td colspan="5" class="empty">
-                    Unable to load reports.
-                </td>
-            </tr>
-        `;
-
     }
-
 }
 
 
-
 // ==========================================
-// FILTERED REPORTS
+// LOST / FOUND / RESOLVED
 // ==========================================
 
-async function loadFilteredReports(type) {
+async function loadFilteredReports(
+    type
+) {
 
-
-    let tableId;
+    let table = null;
 
 
     if (type === "lost") {
 
-        tableId =
-            "lostTable";
+        table =
+            document.getElementById(
+                "lostTable"
+            );
 
     }
 
 
     if (type === "found") {
 
-        tableId =
-            "foundTable";
+        table =
+            document.getElementById(
+                "foundTable"
+            );
 
     }
 
 
     if (type === "resolved") {
 
-        tableId =
-            "resolvedTable";
+        table =
+            document.getElementById(
+                "resolvedTable"
+            );
 
     }
-
-
-    const table =
-        document.getElementById(
-            tableId
-        );
 
 
     if (!table) {
         return;
     }
-
-
-    table.innerHTML = `
-        <tr>
-            <td colspan="5" class="empty">
-                Loading...
-            </td>
-        </tr>
-    `;
 
 
     try {
@@ -916,81 +888,62 @@ async function loadFilteredReports(type) {
         }
 
 
-        const allReports =
+        let filteredReports =
             reports || [];
 
 
-        let filteredReports =
-            [];
-
-
-        // ==========================================
+        // ----------------------------------
         // LOST
-        // ==========================================
+        // ----------------------------------
 
         if (type === "lost") {
 
             filteredReports =
-                allReports.filter(report => {
-
-                    const reportType =
-                        String(
-                            report.type ||
-                            report.report_type ||
-                            report.status_type ||
-                            ""
-                        ).toLowerCase();
-
-
-                    return reportType === "lost";
-
-                });
+                filteredReports.filter(
+                    report =>
+                        getReportType(
+                            report
+                        ) === "lost"
+                );
 
         }
 
 
-        // ==========================================
+        // ----------------------------------
         // FOUND
-        // ==========================================
+        // ----------------------------------
 
         if (type === "found") {
 
             filteredReports =
-                allReports.filter(report => {
-
-                    const reportType =
-                        String(
-                            report.type ||
-                            report.report_type ||
-                            report.status_type ||
-                            ""
-                        ).toLowerCase();
-
-
-                    return reportType === "found";
-
-                });
+                filteredReports.filter(
+                    report =>
+                        getReportType(
+                            report
+                        ) === "found"
+                );
 
         }
 
 
-        // ==========================================
+        // ----------------------------------
         // RESOLVED
-        // ==========================================
+        // ----------------------------------
 
         if (type === "resolved") {
 
             filteredReports =
-                allReports.filter(report => {
-
-                    return isResolved(report);
-
-                });
+                filteredReports.filter(
+                    report =>
+                        isResolved(
+                            report
+                        )
+                );
 
         }
 
 
-        displayReportsInTable(
+        displayReports(
             filteredReports,
             table
         );
@@ -999,66 +952,19 @@ async function loadFilteredReports(type) {
     } catch (error) {
 
         console.error(
-            "Filtered reports error:",
+            "Filter Error:",
             error
         );
 
-
-        table.innerHTML = `
-            <tr>
-                <td colspan="5" class="empty">
-                    Unable to load data.
-                </td>
-            </tr>
-        `;
-
     }
-
 }
 
 
-
 // ==========================================
-// DISPLAY REPORTS IN SECTION TABLE
-// ==========================================
-
-function displayReportsInTable(
-    reports,
-    table
-) {
-
-
-    if (!reports.length) {
-
-        table.innerHTML = `
-            <tr>
-                <td colspan="5" class="empty">
-                    No reports found.
-                </td>
-            </tr>
-        `;
-
-        return;
-    }
-
-
-    table.innerHTML =
-        reports.map(report => {
-
-            return createReportRow(report);
-
-        }).join("");
-
-}
-
-
-
-// ==========================================
-// LOAD USERS
+// USERS
 // ==========================================
 
 async function loadUsers() {
-
 
     const table =
         document.getElementById(
@@ -1071,15 +977,6 @@ async function loadUsers() {
     }
 
 
-    table.innerHTML = `
-        <tr>
-            <td colspan="3" class="empty">
-                Loading users...
-            </td>
-        </tr>
-    `;
-
-
     try {
 
         const {
@@ -1090,12 +987,9 @@ async function loadUsers() {
             .select(
                 "id, full_name, email, role"
             )
-            .order(
-                "full_name",
-                {
-                    ascending: true
-                }
-            );
+            .order("full_name", {
+                ascending: true
+            });
 
 
         if (error) {
@@ -1103,13 +997,18 @@ async function loadUsers() {
         }
 
 
-        if (!users || !users.length) {
+        if (!users || users.length === 0) {
 
             table.innerHTML = `
                 <tr>
-                    <td colspan="3" class="empty">
+
+                    <td
+                        colspan="3"
+                        class="empty"
+                    >
                         No users found.
                     </td>
+
                 </tr>
             `;
 
@@ -1118,254 +1017,243 @@ async function loadUsers() {
 
 
         table.innerHTML =
-            users.map(user => {
+            users.map(user => `
 
+                <tr>
 
-                const role =
-                    user.role ||
-                    "user";
+                    <td>
+                        ${escapeHTML(
+                            user.full_name ||
+                            "No Name"
+                        )}
+                    </td>
 
+                    <td>
+                        ${escapeHTML(
+                            user.email ||
+                            "-"
+                        )}
+                    </td>
 
-                return `
+                    <td>
+                        ${escapeHTML(
+                            user.role ||
+                            "user"
+                        )}
+                    </td>
 
-                    <tr>
+                </tr>
 
-                        <td>
-
-                            <strong>
-                                ${escapeHTML(
-                                    user.full_name ||
-                                    "Unknown User"
-                                )}
-                            </strong>
-
-                        </td>
-
-
-                        <td>
-
-                            ${escapeHTML(
-                                user.email ||
-                                "No email"
-                            )}
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="
-                                status-badge
-                                status-default
-                            ">
-
-                                ${escapeHTML(
-                                    capitalize(role)
-                                )}
-
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-                `;
-
-            }).join("");
+            `).join("");
 
 
     } catch (error) {
 
         console.error(
-            "Users error:",
+            "Users Error:",
             error
         );
 
-
-        table.innerHTML = `
-            <tr>
-                <td colspan="3" class="empty">
-                    Unable to load users.
-                </td>
-            </tr>
-        `;
-
     }
-
 }
-
 
 
 // ==========================================
 // VIEW REPORT
 // ==========================================
 
-window.viewReport =
-    async function (id) {
+window.viewReport = async function(id) {
 
-        try {
+    try {
 
-            const {
-                data,
-                error
-            } = await supabaseClient
-                .from("lost and found")
-                .select("*")
-                .eq("id", id)
-                .single();
-
-
-            if (error) {
-                throw error;
-            }
+        const {
+            data: report,
+            error
+        } = await supabaseClient
+            .from("lost and found")
+            .select("*")
+            .eq("id", id)
+            .single();
 
 
-            const title =
-                data.title ||
-                data.item ||
-                data.item_name ||
-                "Unnamed Item";
+        if (error) {
+            throw error;
+        }
 
 
-            const description =
-                data.description ||
-                "No description available.";
+        // ----------------------------------
+        // REPORT DATA
+        // ----------------------------------
+
+        const title =
+            report.title ||
+            report.item ||
+            report.item_name ||
+            "Unknown Item";
 
 
-            const location =
-                data.location ||
-                "Not provided";
+        const type =
+            getReportType(report) ||
+            "unknown";
 
 
-            const category =
-                data.category ||
-                "Not provided";
+        const category =
+            report.category ||
+            "Other";
 
 
-            // ==========================================
-            // SWEET ALERT
-            // ==========================================
-
-            if (
-                typeof Swal !== "undefined"
-            ) {
-
-                Swal.fire({
-
-                    title:
-                        `Report #${id}`,
-
-                    html: `
-
-                        <div style="
-                            text-align:left;
-                            line-height:1.8;
-                        ">
-
-                            <strong>
-                                Item:
-                            </strong>
-
-                            ${escapeHTML(title)}
-
-                            <br>
-
-                            <strong>
-                                Category:
-                            </strong>
-
-                            ${escapeHTML(category)}
-
-                            <br>
-
-                            <strong>
-                                Location:
-                            </strong>
-
-                            ${escapeHTML(location)}
-
-                            <br><br>
-
-                            <strong>
-                                Description:
-                            </strong>
-
-                            <br>
-
-                            ${escapeHTML(description)}
-
-                        </div>
-
-                    `,
-
-                    icon:
-                        "info",
-
-                    confirmButtonText:
-                        "Close"
-
-                });
-
-            } else {
-
-                alert(
-
-                    `Report #${id}\n\n` +
-
-                    `Item: ${title}\n` +
-
-                    `Category: ${category}\n` +
-
-                    `Location: ${location}\n\n` +
-
-                    `Description:\n${description}`
-
-                );
-
-            }
+        const location =
+            report.location ||
+            "Not specified";
 
 
-        } catch (error) {
-
-            console.error(
-                "View report error:",
-                error
-            );
+        const description =
+            report.description ||
+            "No description available.";
 
 
-            if (
-                typeof Swal !== "undefined"
-            ) {
+        const status =
+            getReportStatus(report) ||
+            "active";
 
-                Swal.fire({
 
-                    icon:
-                        "error",
+        // ----------------------------------
+        // IMAGE
+        // IMPORTANT:
+        // Supabase column = img-url
+        // ----------------------------------
 
-                    title:
-                        "Unable to open report",
+        const imageUrl =
+            report["img-url"] ||
+            "";
 
-                    text:
-                        "Something went wrong."
 
-                });
+        // ----------------------------------
+        // IMAGE HTML
+        // ----------------------------------
 
-            } else {
+        let imageHTML = "";
 
-                alert(
-                    "Unable to open this report."
-                );
 
-            }
+        if (imageUrl) {
+
+            imageHTML = `
+                <div style="
+                    width: 100%;
+                    margin-bottom: 20px;
+                    text-align: center;
+                ">
+
+                    <img
+                        src="${escapeHTML(imageUrl)}"
+                        alt="${escapeHTML(title)}"
+                        style="
+                            width: 100%;
+                            max-width: 340px;
+                            height: 230px;
+                            object-fit: cover;
+                            border-radius: 14px;
+                            display: block;
+                            margin: 0 auto;
+                            border: 1px solid rgba(255,255,255,0.12);
+                            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+                        "
+                        onerror="
+                            this.style.display='none';
+                        "
+                    >
+
+                </div>
+            `;
 
         }
 
-    };
 
+        // ----------------------------------
+        // SWEETALERT
+        // ----------------------------------
+
+        await Swal.fire({
+
+            title:
+                escapeHTML(title),
+
+            html: `
+
+                <div style="
+                    text-align: left;
+                    line-height: 1.8;
+                ">
+
+                    ${imageHTML}
+
+                    <p>
+                        <strong>Type:</strong>
+                        ${escapeHTML(
+                            capitalize(type)
+                        )}
+                    </p>
+
+                    <p>
+                        <strong>Category:</strong>
+                        ${escapeHTML(category)}
+                    </p>
+
+                    <p>
+                        <strong>Location:</strong>
+                        ${escapeHTML(location)}
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        ${escapeHTML(
+                            capitalize(status)
+                        )}
+                    </p>
+
+                    <p>
+                        <strong>Description:</strong>
+                        ${escapeHTML(
+                            description
+                        )}
+                    </p>
+
+                </div>
+
+            `,
+
+            confirmButtonText:
+                "Close"
+
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            "View Report Error:",
+            error
+        );
+
+
+        Swal.fire({
+
+            icon: "error",
+
+            title: "Error",
+
+            text:
+                error.message ||
+                "Unable to load report."
+
+        });
+
+    }
+};
 
 
 // ==========================================
-// QUICK ACTIONS
+// BUTTONS
 // ==========================================
 
 const allReportsBtn =
@@ -1373,15 +1261,51 @@ const allReportsBtn =
         "allReportsBtn"
     );
 
+
+if (allReportsBtn) {
+
+    allReportsBtn.addEventListener(
+        "click",
+        () =>
+            showSection("reports")
+    );
+
+}
+
+
 const usersBtn =
     document.getElementById(
         "usersBtn"
     );
 
+
+if (usersBtn) {
+
+    usersBtn.addEventListener(
+        "click",
+        () =>
+            showSection("users")
+    );
+
+}
+
+
 const resolvedBtn =
     document.getElementById(
         "resolvedBtn"
     );
+
+
+if (resolvedBtn) {
+
+    resolvedBtn.addEventListener(
+        "click",
+        () =>
+            showSection("resolved")
+    );
+
+}
+
 
 const viewAllReportsBtn =
     document.getElementById(
@@ -1389,241 +1313,46 @@ const viewAllReportsBtn =
     );
 
 
-
-// ==========================================
-// ALL REPORTS BUTTON
-// ==========================================
-
-if (allReportsBtn) {
-
-    allReportsBtn.addEventListener(
-        "click",
-        () => {
-
-            showSection(
-                "reports"
-            );
-
-        }
-    );
-
-}
-
-
-
-// ==========================================
-// USERS BUTTON
-// ==========================================
-
-if (usersBtn) {
-
-    usersBtn.addEventListener(
-        "click",
-        () => {
-
-            showSection(
-                "users"
-            );
-
-        }
-    );
-
-}
-
-
-
-// ==========================================
-// RESOLVED BUTTON
-// ==========================================
-
-if (resolvedBtn) {
-
-    resolvedBtn.addEventListener(
-        "click",
-        () => {
-
-            showSection(
-                "resolved"
-            );
-
-        }
-    );
-
-}
-
-
-
-// ==========================================
-// VIEW ALL REPORTS
-// ==========================================
-
 if (viewAllReportsBtn) {
 
     viewAllReportsBtn.addEventListener(
         "click",
-        () => {
-
-            showSection(
-                "reports"
-            );
-
-        }
+        () =>
+            showSection("reports")
     );
 
 }
 
 
-
 // ==========================================
-// LOGOUT
-// ==========================================
-
-if (logoutBtn) {
-
-    logoutBtn.addEventListener(
-        "click",
-        async () => {
-
-
-            let confirmLogout =
-                true;
-
-
-            if (
-                typeof Swal !== "undefined"
-            ) {
-
-                const result =
-                    await Swal.fire({
-
-                        icon:
-                            "question",
-
-                        title:
-                            "Logout?",
-
-                        text:
-                            "Are you sure you want to logout?",
-
-                        showCancelButton:
-                            true,
-
-                        confirmButtonText:
-                            "Yes, Logout",
-
-                        cancelButtonText:
-                            "Cancel"
-
-                    });
-
-
-                confirmLogout =
-                    result.isConfirmed;
-
-            } else {
-
-                confirmLogout =
-                    confirm(
-                        "Are you sure you want to logout?"
-                    );
-
-            }
-
-
-            if (!confirmLogout) {
-                return;
-            }
-
-
-            await supabaseClient.auth.signOut();
-
-
-            sessionStorage.clear();
-
-
-            window.location.href =
-                "admin-login.html";
-
-        }
-    );
-
-}
-
-
-
-// ==========================================
-// HELPER - CAPITALIZE
+// HELPERS
 // ==========================================
 
-function capitalize(text) {
+function capitalize(value) {
 
-    if (!text) {
+    if (!value) {
         return "";
     }
 
 
     return (
-        text.charAt(0).toUpperCase() +
-        text.slice(1)
+        value.charAt(0).toUpperCase() +
+        value.slice(1)
     );
-
 }
 
-
-
-// ==========================================
-// HELPER - ESCAPE HTML
-// ==========================================
 
 function escapeHTML(value) {
 
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "";
-
-    }
-
-
-    return String(value)
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
-
-
-// ==========================================
-// INITIALIZE ADMIN DASHBOARD
-// ==========================================
-
 async function initAdminDashboard() {
-
 
     const isAdmin =
         await checkAdmin();
@@ -1634,15 +1363,12 @@ async function initAdminDashboard() {
     }
 
 
-    // Load dashboard data
     await loadDashboard();
 
 
-    // Always start on dashboard
     showSection(
         "dashboard"
     );
-
 }
 
 

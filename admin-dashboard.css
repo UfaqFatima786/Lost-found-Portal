@@ -345,7 +345,9 @@ border-radius: 10px;
 }
 .sidebar-menu .nav-link.active {
     background: var(--primary);
+
     color: var(--white);
+
     box-shadow: 0 8px 20px rgba(99, 91, 255, 0.20);
 }
 
@@ -906,10 +908,146 @@ td {
     margin-top: 2px;
 }
 
+/* ================================
+   VIEW & RESOLVED BUTTONS
+================================ */
 
-/* =========================================
-   RESPONSIVE
-========================================= */
+.view-btn,
+.resolve-btn,
+.resolved-btn {
+    border: none;
+    outline: none;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+    min-width: 105px;
+    min-height: 38px;
+
+    font-family: inherit;
+}
+
+
+/* ================================
+   VIEW BUTTON
+================================ */
+
+.view-btn {
+    background: rgba(59, 130, 246, 0.12);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+
+    margin-bottom: 9px;
+}
+
+.view-btn:hover {
+    background: rgba(59, 130, 246, 0.22);
+    border-color: #3b82f6;
+    color: #93c5fd;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 18px rgba(59, 130, 246, 0.2);
+}
+
+
+/* ================================
+   RESOLVE BUTTON
+================================ */
+
+.resolve-btn {
+    background: rgba(34, 197, 94, 0.12);
+    color: #4ade80;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.resolve-btn:hover {
+    background: rgba(34, 197, 94, 0.22);
+    border-color: #22c55e;
+    color: #86efac;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 18px rgba(34, 197, 94, 0.2);
+}
+
+
+/* ================================
+   RESOLVED STATUS BUTTON / BADGE
+================================ */
+
+.resolved-btn {
+    background: rgba(168, 85, 247, 0.12);
+    color: #c084fc;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+
+    cursor: default;
+}
+
+.resolved-btn:hover {
+    background: rgba(168, 85, 247, 0.18);
+}
+
+
+/* ================================
+   BUTTON ACTIVE EFFECT
+================================ */
+
+.view-btn:active,
+.resolve-btn:active {
+    transform: scale(0.96);
+}
+
+
+/* ================================
+   BUTTON ICON
+================================ */
+
+.view-btn i,
+.resolve-btn i,
+.resolved-btn i {
+    font-size: 14px;
+}
+
+
+/* ================================
+   EXTRA SPACE BETWEEN ACTION BUTTONS
+================================ */
+
+/* Agar buttons same container mein hain */
+.view-btn + .resolve-btn,
+.view-btn + .resolved-btn {
+    margin-top: 9px;
+}
+
+
+/* Agar buttons table cell mein hain */
+td .view-btn,
+td .resolve-btn,
+td .resolved-btn {
+    display: flex;
+    width: 105px;
+}
+
+
+/* ================================
+   ACTION CELL
+================================ */
+
+td:last-child {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
 
 @media (max-width: 1100px) {
 
