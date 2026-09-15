@@ -809,7 +809,568 @@ select {
     color: #77788a;
     font-size: 0.75rem;
 }
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
 
+* {
+    box-sizing: border-box;
+}
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+/* Main containers */
+.container,
+section,
+main,
+header,
+footer {
+    max-width: 100%;
+}
+
+
+/* Report sections */
+#lostItemsContainer,
+#foundItemsContainer,
+#resolvedItemsContainer {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+
+/* Cards */
+.item-card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+}
+
+
+/* Card images */
+.item-image {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.item-image img {
+    width: 100%;
+    max-width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+
+/* Card content */
+.item-card-content {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.item-card-top {
+    max-width: 100%;
+    min-width: 0;
+}
+
+.item-card-top h3 {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+
+/* Long text should not push the page */
+.item-description {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+
+/* Meta information */
+.item-meta {
+    max-width: 100%;
+    min-width: 0;
+}
+
+.item-meta span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+#lostItemsContainer,
+#foundItemsContainer,
+#resolvedItemsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    width: 100%;
+}
+
+
+/* ==========================================
+   ITEM CARD
+========================================== */
+
+.item-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    position: relative;
+    min-width: 0;
+}
+
+.item-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 45px rgba(35, 34, 70, 0.13);
+    border-color: rgba(99, 91, 255, 0.25);
+}
+
+
+/* ==========================================
+   ITEM IMAGE
+========================================== */
+
+.item-image {
+    width: 100%;
+    height: 210px;
+    background: var(--primary-light);
+    overflow: hidden;
+    position: relative;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.item-card:hover .item-image img {
+    transform: scale(1.05);
+}
+
+
+/* No image */
+.item-image.no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-light);
+}
+
+.item-image.no-image i {
+    font-size: 48px;
+    color: var(--primary);
+    opacity: 0.55;
+}
+
+
+/* ==========================================
+   CARD CONTENT
+========================================== */
+
+.item-card-content {
+    padding: 20px;
+    min-width: 0;
+}
+
+
+/* ==========================================
+   TITLE + BADGE
+========================================== */
+
+.item-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.item-card-top h3 {
+    margin: 0;
+    color: var(--dark);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+}
+
+
+/* ==========================================
+   BADGES
+========================================== */
+
+.item-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 11px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+
+/* Lost */
+.lost-badge {
+    color: var(--red);
+    background: var(--red-light);
+    border: 1px solid rgba(239, 91, 100, 0.15);
+}
+
+
+/* Found */
+.found-badge {
+    color: var(--green);
+    background: var(--green-light);
+    border: 1px solid rgba(22, 163, 106, 0.15);
+}
+
+
+/* Resolved */
+.resolved-badge {
+    color: var(--primary);
+    background: var(--primary-light);
+    border: 1px solid rgba(99, 91, 255, 0.15);
+}
+
+
+/* ==========================================
+   META INFORMATION
+========================================== */
+
+.item-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.item-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-size: 12px;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
+
+.item-meta i {
+    color: var(--primary);
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   DESCRIPTION
+========================================== */
+
+.item-description {
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0 0 18px;
+    overflow-wrap: anywhere;
+
+    /* Keep cards neat */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.item-footer {
+    padding-top: 15px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.item-footer span {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+
+/* Lost footer */
+.item-footer .bi-search {
+    color: var(--red);
+}
+
+
+/* Found footer */
+.item-footer .bi-info-circle {
+    color: var(--green);
+}
+
+
+/* Recovered */
+.recovered-label {
+    color: var(--green) !important;
+    font-weight: 600;
+}
+
+.recovered-label i {
+    color: var(--green);
+}
+
+
+/* ==========================================
+   EMPTY STATE
+========================================== */
+
+.empty-state {
+    width: 100%;
+    min-height: 260px;
+    padding: 35px 25px;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.empty-icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+.found-empty {
+    background: var(--green-light);
+    color: var(--green);
+}
+
+.empty-state h3 {
+    color: var(--dark);
+    margin: 0 0 8px;
+    font-size: 19px;
+}
+
+.empty-state p {
+    color: var(--muted);
+    margin: 0 0 18px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* ==========================================
+   EMPTY BUTTONS
+========================================== */
+
+.empty-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    border-radius: 10px;
+    background: var(--primary);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.empty-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.found-btn {
+    background: var(--green);
+}
+
+.found-btn:hover {
+    background: #128957;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 768px) {
+
+    #lostItemsContainer,
+    #foundItemsContainer,
+    #resolvedItemsContainer {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .item-image {
+        height: 200px;
+    }
+
+    .item-card-content {
+        padding: 17px;
+    }
+
+    .item-card-top {
+        flex-wrap: wrap;
+    }
+
+    .item-card-top h3 {
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .item-badge {
+        font-size: 11px;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    #lostItemsContainer,
+    #foundItemsContainer,
+    #resolvedItemsContainer {
+        width: 100%;
+        grid-template-columns: 1fr;
+    }
+
+    .item-image {
+        height: 180px;
+    }
+
+    .item-card-content {
+        padding: 15px;
+    }
+
+    .item-card-top h3 {
+        font-size: 17px;
+    }
+
+    .item-meta {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .item-meta span {
+        width: 100%;
+    }
+
+    .item-description {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 992px) {
+
+    .item-card {
+        width: 100%;
+    }
+
+    .item-image img {
+        height: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .item-card {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .item-image img {
+        width: 100%;
+        height: 190px;
+        object-fit: cover;
+    }
+
+    .item-card-top {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .item-card-top h3 {
+        flex: 1 1 100%;
+    }
+
+    .item-meta {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .item-footer {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .item-card {
+        width: 100%;
+        border-radius: 12px;
+    }
+
+    .item-image img {
+        height: 170px;
+    }
+
+    .item-card-content {
+        padding: 14px;
+    }
+
+    .item-card-top h3 {
+        font-size: 18px;
+    }
+
+    .item-description {
+        font-size: 14px;
+    }
+}
 
 @media (max-width: 1000px) {
 
