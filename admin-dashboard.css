@@ -56,81 +56,54 @@ a {
     color: inherit;
 }
 
-
-/* =========================================
-   LAYOUT
-========================================= */
-
 .admin-layout {
     min-height: 100vh;
     display: flex;
 }
 
-
-/* =========================================
-   SIDEBAR
-========================================= */
-
 .sidebar {
-    width: 250px;
+    width: 200px;
     min-height: 100vh;
-
     position: fixed;
     left: 0;
     top: 0;
     bottom: 0;
-
     background: var(--white);
     border-right: 1px solid var(--border);
-
     display: flex;
     flex-direction: column;
-
     padding: 25px 15px;
-
     z-index: 1000;
 }
-
-
-/* Logo */
 
 .admin-logo {
     display: flex;
     align-items: center;
     gap: 11px;
-
     padding: 5px 10px 30px;
-
     border-bottom: 1px solid var(--border);
 }
 
 .logo-icon {
     width: 43px;
     height: 43px;
-
     border-radius: 13px;
-
     display: grid;
     place-items: center;
-
     color: white;
-
     background:
         linear-gradient(
             135deg,
             var(--primary),
             #928bff
         );
-
     box-shadow:
         0 8px 20px rgba(99, 91, 255, 0.25);
 }
 
 .admin-logo strong {
     display: block;
-
     font-family: "Outfit", sans-serif;
-
     font-size: 1rem;
 }
 
@@ -140,17 +113,10 @@ a {
 
 .admin-logo small {
     display: block;
-
     color: var(--muted);
-
     font-size: 0.68rem;
-
     margin-top: 1px;
 }
-
-
-/* Navigation */
-
 .sidebar-nav {
     padding-top: 25px;
     flex: 1;
@@ -218,9 +184,6 @@ a {
     font-weight: 700;
 }
 
-
-/* Sidebar bottom */
-
 .sidebar-bottom {
     border-top: 1px solid var(--border);
 
@@ -266,11 +229,9 @@ a {
     color: var(--red);
 }
 
-.main-content {
+ .main-content {
     width: calc(100% - 250px);
-
     margin-left: 100px;
-
     min-height: 100vh;
 }
 
@@ -358,17 +319,11 @@ border-radius: 10px;
     color: var(--white);
 }
 
-
-/* Active Hover */
-
 .sidebar-menu .nav-link.active:hover {
     background: var(--primary-dark);
 
     color: var(--white);
 }
-
-
-/* Active Hover Icon */
 
 .sidebar-menu .nav-link.active:hover i {
     color: var(--white);
@@ -413,11 +368,6 @@ border-radius: 10px;
 
     font-size: 0.68rem;
 }
-
-
-/* =========================================
-   DASHBOARD
-========================================= */
 
 .dashboard {
     padding: 35px;
@@ -465,11 +415,6 @@ border-radius: 10px;
 
     font-size: 0.9rem;
 }
-
-
-/* =========================================
-   STAT CARDS
-========================================= */
 
 .stats-grid {
     display: grid;
@@ -562,12 +507,6 @@ border-radius: 10px;
 
     line-height: 1;
 }
-
-
-/* =========================================
-   CONTENT GRID
-========================================= */
-
 .content-grid {
     display: grid;
 
@@ -576,12 +515,6 @@ border-radius: 10px;
 
     gap: 20px;
 }
-
-
-/* =========================================
-   CARDS
-========================================= */
-
 .reports-card,
 .quick-card {
     background: var(--white);
@@ -645,10 +578,6 @@ border-radius: 10px;
     gap: 7px;
 }
 
-
-/* =========================================
-   TABLE
-========================================= */
 
 .table-wrapper {
     width: 100%;
@@ -738,110 +667,68 @@ td {
 
     font-size: 0.66rem;
 }
-
-
-/* Type */
-
 .type-badge {
     display: inline-flex;
-
     align-items: center;
-
     padding: 5px 9px;
-
     border-radius: 20px;
-
     font-size: 0.65rem;
-
     font-weight: 800;
 }
 
 .type-lost {
     color: var(--red);
-
     background: var(--red-light);
 }
 
 .type-found {
     color: var(--green);
-
-    background: var(--green-light);
-}
-
-
-/* Status */
+    background: var(--green-light);}
 
 .status-badge {
     display: inline-flex;
-
     align-items: center;
-
     padding: 5px 9px;
-
     border-radius: 20px;
-
     font-size: 0.65rem;
-
     font-weight: 800;
 }
 
 .status-pending {
     color: var(--orange);
-
     background: var(--orange-light);
 }
 
 .status-resolved {
     color: var(--green);
-
     background: var(--green-light);
 }
 
 .status-default {
     color: var(--muted);
-
     background: #f1f1f6;
 }
-
-
-/* Action */
 
 .action-btn {
     width: 31px;
     height: 31px;
-
     border: 0;
-
     border-radius: 8px;
-
     color: var(--primary);
-
     background: var(--primary-light);
-
     transition: 0.3s ease;
 }
 
 .action-btn:hover {
     background: var(--primary);
-
     color: white;
 }
 
-
-/* Empty */
-
 .empty {
     text-align: center;
-
-    padding: 40px !important;
-
+   padding: 40px !important;
     color: var(--muted);
 }
-
-
-/* =========================================
-   QUICK ACTIONS
-========================================= */
 
 .quick-actions {
     padding: 12px;
@@ -849,23 +736,14 @@ td {
 
 .quick-actions button {
     width: 100%;
-
     display: flex;
-
     align-items: center;
-
     gap: 12px;
-
     border: 0;
-
     background: transparent;
-
     text-align: left;
-
     padding: 13px;
-
     border-radius: 12px;
-
     transition: 0.3s ease;
 }
 
@@ -876,41 +754,26 @@ td {
 .quick-actions button > i {
     width: 40px;
     height: 40px;
-
     flex-shrink: 0;
-
     display: grid;
-
     place-items: center;
-
     border-radius: 11px;
-
     color: var(--primary);
-
     background: var(--primary-light);
 }
 
 .quick-actions strong {
     display: block;
-
     color: var(--dark);
-
-    font-size: 0.78rem;
+    font-size: 0.7rem;
 }
 
 .quick-actions small {
     display: block;
-
     color: var(--muted);
-
     font-size: 0.65rem;
-
     margin-top: 2px;
 }
-
-/* ================================
-   VIEW & RESOLVED BUTTONS
-================================ */
 
 .view-btn,
 .resolve-btn,
@@ -931,20 +794,13 @@ td {
     gap: 6px;
     min-width: 105px;
     min-height: 38px;
-
-    font-family: inherit;
+   font-family: inherit;
 }
-
-
-/* ================================
-   VIEW BUTTON
-================================ */
 
 .view-btn {
     background: rgba(59, 130, 246, 0.12);
     color: #60a5fa;
     border: 1px solid rgba(59, 130, 246, 0.3);
-
     margin-bottom: 9px;
 }
 
@@ -952,17 +808,10 @@ td {
     background: rgba(59, 130, 246, 0.22);
     border-color: #3b82f6;
     color: #93c5fd;
-
     transform: translateY(-2px);
-
     box-shadow:
         0 5px 18px rgba(59, 130, 246, 0.2);
 }
-
-
-/* ================================
-   RESOLVE BUTTON
-================================ */
 
 .resolve-btn {
     background: rgba(34, 197, 94, 0.12);
@@ -981,11 +830,6 @@ td {
         0 5px 18px rgba(34, 197, 94, 0.2);
 }
 
-
-/* ================================
-   RESOLVED STATUS BUTTON / BADGE
-================================ */
-
 .resolved-btn {
     background: rgba(168, 85, 247, 0.12);
     color: #c084fc;
@@ -999,39 +843,21 @@ td {
 }
 
 
-/* ================================
-   BUTTON ACTIVE EFFECT
-================================ */
-
 .view-btn:active,
 .resolve-btn:active {
     transform: scale(0.96);
 }
 
 
-/* ================================
-   BUTTON ICON
-================================ */
-
 .view-btn i,
 .resolve-btn i,
 .resolved-btn i {
     font-size: 14px;
 }
-
-
-/* ================================
-   EXTRA SPACE BETWEEN ACTION BUTTONS
-================================ */
-
-/* Agar buttons same container mein hain */
 .view-btn + .resolve-btn,
 .view-btn + .resolved-btn {
     margin-top: 9px;
 }
-
-
-/* Agar buttons table cell mein hain */
 td .view-btn,
 td .resolve-btn,
 td .resolved-btn {
@@ -1039,21 +865,151 @@ td .resolved-btn {
     width: 105px;
 }
 
-
-/* ================================
-   ACTION CELL
-================================ */
-
 td:last-child {
     padding-top: 12px;
     padding-bottom: 12px;
 }
+.admin-section {
+    padding: 35px;
+    max-width: 1500px;
+    margin: 0 auto;
+    min-height: calc(100vh - 75px);
+}
 
-@media (max-width: 1100px) {
+.section-header {
+    margin-bottom: 30px;
+}
+
+.section-header > div > span {
+    display: block;
+    color: var(--primary);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-bottom: 7px;
+}
+
+.section-header h1 {
+    font-family: "Outfit", sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    line-height: 1.15;
+    margin-bottom: 7px;
+    color: var(--dark);
+}
+
+.section-header p {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.admin-section > .reports-card {
+    width: 100%;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: none;
+}
+
+.admin-section .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.admin-section table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 650px;
+}
+
+.admin-section thead {
+    background: #fafaff;
+}
+
+.admin-section th {
+    color: var(--muted);
+    font-size: 0.67rem;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    text-align: left;
+    padding: 15px 20px;
+    font-weight: 800;
+}
+
+.admin-section td {
+    padding: 15px 20px;
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem;
+    color: var(--text);
+    vertical-align: middle;
+}
+
+#usersSection table {
+    min-width: 500px;
+}
+
+#usersSection th,
+#usersSection td {
+    padding: 16px 22px;
+}
+
+#usersSection tbody tr {
+    transition: 0.2s ease;
+}
+
+#usersSection tbody tr:hover,
+#reportsSection tbody tr:hover,
+#lostSection tbody tr:hover,
+#foundSection tbody tr:hover,
+#resolvedSection tbody tr:hover {
+    background: #fafaff;
+}
+
+.admin-section .report-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-section .report-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    object-fit: cover;
+    background: var(--primary-light);
+}
+
+.admin-section .report-name strong {
+    display: block;
+    color: var(--dark);
+    font-size: 0.8rem;
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.admin-section .report-name small {
+    display: block;
+    color: var(--muted);
+    font-size: 0.66rem;
+}
+
+.admin-section .empty {
+    text-align: center;
+    padding: 45px !important;
+    color: var(--muted);
+}
+
+@media (max-width: 1200px) {
+
+    .dashboard,
+    .admin-section {
+        padding: 30px 25px;
+    }
 
     .stats-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .content-grid {
@@ -1061,71 +1017,42 @@ td:last-child {
     }
 
     .quick-card {
-        margin-bottom: 20px;
+        width: 100%;
     }
 }
 
-
-@media (max-width: 800px) {
+@media (max-width: 900px) {
 
     .sidebar {
-        width: 70px;
-
-        padding: 20px 10px;
-    }
-
-    .admin-logo {
-        justify-content: center;
-
-        padding: 5px 0 25px;
-    }
-
-    .admin-logo > div:last-child {
-        display: none;
-    }
-
-    .sidebar-nav a {
-        justify-content: center;
-
-        padding: 13px;
-    }
-
-    .sidebar-nav a i {
-        margin: 0;
-    }
-
-    .sidebar-nav a {
-        font-size: 0;
-    }
-
-    .sidebar-nav a i {
-        font-size: 1rem;
-    }
-
-    .nav-title {
-        font-size: 0;
-        height: 10px;
-    }
-
-    .sidebar-bottom a,
-    .sidebar-bottom button {
-        justify-content: center;
-
-        font-size: 0;
-    }
-
-    .sidebar-bottom i {
-        font-size: 1rem;
+        width: 220px;
     }
 
     .main-content {
-        width: calc(100% - 70px);
-
-        margin-left: 70px;
+        width: calc(100% - 220px);
+        margin-left: 220px;
     }
 
-    .dashboard {
+    .dashboard,
+    .admin-section {
         padding: 25px 20px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .stat-card {
+        padding: 18px;
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .reports-card,
+    .quick-card {
+        width: 100%;
     }
 
     .topbar {
@@ -1133,36 +1060,700 @@ td:last-child {
     }
 }
 
-
-@media (max-width: 550px) {
-
-    .stats-grid {
-        grid-template-columns: 1fr;
+@media (max-width: 700px) {
+    .sidebar {
+        width: 65px;
+        padding: 15px 8px;
     }
 
-    .dashboard {
-        padding: 20px 14px;
+    .admin-logo {
+        justify-content: center;
+        padding: 5px 0 20px;
+        border-bottom: 0;
     }
 
-    .welcome h1 {
-        font-size: 1.7rem;
+    .admin-logo > div:not(.logo-icon) {
+        display: none;
     }
+
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .sidebar-nav {
+        padding-top: 25px;
+    }
+
+    .nav-title {
+        display: none;
+    }
+
+    .sidebar-nav a {
+        width: 48px;
+        height: 48px;
+
+        margin: 0 auto 8px;
+
+        padding: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        gap: 0;
+    }
+
+    .sidebar-nav a i {
+        width: auto;
+        font-size: 17px;
+    }
+
+    .sidebar-nav a span {
+        display: none;
+    }
+
+    .sidebar-bottom a,
+    .sidebar-bottom button {
+        width: 48px;
+        height: 48px;
+
+        margin: 0 auto;
+
+        padding: 0;
+
+        justify-content: center;
+    }
+
+    .sidebar-bottom a span,
+    .sidebar-bottom button span {
+        display: none;
+    }
+
+
+    /* Main content */
+
+    .main-content {
+        width: calc(100% - 65px);
+        margin-left: 65px;
+    }
+
+
+    /* Topbar */
 
     .topbar {
-        height: 68px;
+        height: 65px;
+        padding: 0 15px;
+        border-radius: 0 0 10px 10px;
     }
 
-    .admin-profile small {
-        display: none;
+    .admin-profile {
+        gap: 8px;
     }
 
     .admin-profile strong {
         font-size: 0.75rem;
     }
 
+    .admin-profile small {
+        display: none;
+    }
+
     .profile-avatar {
         width: 36px;
         height: 36px;
+        border-radius: 10px;
     }
 
+    .dashboard,
+    .admin-section {
+        width: 100%;
+        max-width: 100%;
+        padding: 25px 15px;
+        overflow-x: hidden;
+    }
+    .welcome,
+    .section-header {
+        margin-bottom: 22px;
+    }
+
+    .welcome h1,
+    .section-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .welcome p,
+    .section-header p {
+        font-size: 0.82rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .stat-card {
+        padding: 15px;
+        gap: 12px;
+    }
+
+    .stat-icon {
+        width: 45px;
+        height: 45px;
+        border-radius: 11px;
+        font-size: 1rem;
+    }
+
+    .stat-card span {
+        font-size: 0.68rem;
+    }
+
+    .stat-card h2 {
+        font-size: 1.4rem;
+    }
+
+    .content-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .reports-card,
+    .quick-card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .card-header {
+        padding: 18px 15px;
+        gap: 10px;
+    }
+
+    .card-header h2 {
+        font-size: 1.05rem;
+    }
+
+    .card-header span {
+        font-size: 0.58rem;
+    }
+
+
+    .table-wrapper,
+    .admin-section .table-wrapper {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+        overflow-y: visible;
+    }
+
+    table,
+    .admin-section table {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100%;
+        table-layout: fixed;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tbody {
+        width: 100%;
+        display: block;
+    }
+
+    tbody tr {
+        width: 100%;
+        display: block;
+
+        padding: 14px;
+
+        border-bottom: 1px solid var(--border);
+
+        background: var(--white);
+    }
+
+    tbody tr:last-child {
+        border-bottom: 0;
+    }
+
+    tbody td {
+        width: 100% !important;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 10px;
+
+        padding: 8px 4px !important;
+
+        border: 0;
+
+        font-size: 0.75rem;
+
+        text-align: right;
+
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    tbody td:first-child {
+        padding-top: 4px !important;
+    }
+
+    tbody td:last-child {
+        padding-bottom: 4px !important;
+    }
+
+    .report-name,
+    .admin-section .report-name {
+        width: 100%;
+        justify-content: flex-start;
+        text-align: left;
+    }
+
+    .report-image,
+    .admin-section .report-image {
+        width: 38px;
+        height: 38px;
+        flex-shrink: 0;
+    }
+
+    .report-name strong,
+    .admin-section .report-name strong {
+        max-width: calc(100vw - 150px);
+        font-size: 0.75rem;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: unset;
+        overflow-wrap: anywhere;
+    }
+
+    .report-name small,
+    .admin-section .report-name small {
+        font-size: 0.61rem;
+        overflow-wrap: anywhere;
+    }
+    .type-badge,
+    .status-badge {
+        font-size: 0.61rem;
+        padding: 5px 8px;
+        flex-shrink: 0;
+    }
+
+    td .view-btn,
+    td .resolve-btn,
+    td .resolved-btn {
+        width: auto;
+        min-width: 100px;
+        min-height: 35px;
+        padding: 8px 12px;
+        font-size: 11px;
+        margin: 3px 0;
+    }
+
+    .view-btn,
+    .resolve-btn,
+    .resolved-btn {
+        min-width: 100px;
+    }
+    .empty,
+    .admin-section .empty {
+        padding: 35px 15px !important;
+        text-align: center;
+        display: block;
+    }
+
+    .quick-actions {
+        padding: 8px;
+    }
+
+    .quick-actions button {
+        padding: 10px;
+    }
+
+    .quick-actions button > i {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media (max-width: 600px) {
+    .sidebar-menu {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 60px;
+        height: 100vh;
+        margin: 0;
+        padding: 80px 7px 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        background: var(--white);
+        border-right: 1px solid var(--border);
+        z-index: 1000;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    .sidebar-menu .nav-link span {
+        display: none;
+    }
+    .sidebar-menu .nav-link {
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        border-radius: 11px;
+        font-size: 0;
+    }
+    .sidebar-menu .nav-link i {
+        width: auto;
+        margin: 0;
+        font-size: 16px;
+        text-align: center;
+    }
+    .sidebar-menu .nav-link:hover {
+        transform: none;
+    }
+    .sidebar-menu .nav-link.active {
+        width: 44px;
+        height: 44px;
+    }
+    .main-content {
+        width: calc(100% - 60px);
+        margin-left: 60px;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+    .topbar {
+        width: 100%;
+        height: 65px;
+        padding: 0 12px;
+        border-radius: 0 0 10px 10px;
+    }
+    .dashboard,
+    .admin-section {
+        width: 100%;
+        max-width: 100%;
+
+        padding: 22px 12px;
+
+        overflow-x: hidden;
+    }
+    .reports-card,
+    .quick-card,
+    .admin-section > .reports-card {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .sidebar-menu {
+        width: 52px;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 75px;
+        gap: 8px;
+    }
+
+    .sidebar-menu .nav-link,
+    .sidebar-menu .nav-link.active {
+        width: 40px;
+        height: 40px;
+
+        border-radius: 9px;
+    }
+
+    .sidebar-menu .nav-link i {
+        font-size: 14px;
+    }
+
+    .main-content {
+        width: calc(100% - 52px);
+        margin-left: 52px;
+    }
+
+    .dashboard,
+    .admin-section {
+        padding: 18px 9px;
+    }
+}
+
+@media (max-width: 550px) {
+
+    .sidebar {
+        width: 58px;
+        padding: 12px 6px;
+    }
+
+    .logo-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 11px;
+        font-size: 14px;
+    }
+
+    .sidebar-nav {
+        padding-top: 20px;
+    }
+
+    .sidebar-nav a {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+    }
+
+    .sidebar-nav a i {
+        font-size: 15px;
+    }
+
+    .sidebar-bottom {
+        padding-top: 10px;
+    }
+
+    .sidebar-bottom a,
+    .sidebar-bottom button {
+        width: 44px;
+        height: 44px;
+    }
+
+    .main-content {
+        width: calc(100% - 58px);
+        margin-left: 58px;
+    }
+    .topbar {
+        height: 60px;
+        padding: 0 10px;
+    }
+
+    .admin-profile strong {
+        font-size: 0.7rem;
+    }
+
+    .profile-avatar {
+        width: 34px;
+        height: 34px;
+    }
+
+    .dashboard,
+    .admin-section {
+        padding: 20px 10px;
+    }
+
+    .welcome > div > span,
+    .section-header > div > span {
+        font-size: 0.58rem;
+        letter-spacing: 1px;
+    }
+
+    .welcome h1,
+    .section-header h1 {
+        font-size: 1.55rem;
+    }
+
+    .welcome p,
+    .section-header p {
+        font-size: 0.76rem;
+        line-height: 1.5;
+    }
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .stat-card {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .stat-icon {
+        width: 43px;
+        height: 43px;
+    }
+
+    .reports-card,
+    .quick-card,
+    .admin-section > .reports-card {
+        border-radius: 14px;
+    }
+
+    .card-header {
+        padding: 16px 13px;
+    }
+
+    .card-header h2 {
+        font-size: 0.95rem;
+    }
+
+    tbody tr {
+        padding: 13px 10px;
+        margin-bottom: 8px;
+
+        border: 1px solid var(--border);
+        border-radius: 12px;
+
+        box-shadow: 0 4px 15px rgba(35, 34, 70, 0.03);
+    }
+
+    tbody td {
+        padding: 7px 2px !important;
+        font-size: 0.7rem;
+    }
+    #usersSection table {
+        min-width: 0 !important;
+    }
+
+    #usersSection th,
+    #usersSection td {
+        padding: 7px 2px !important;
+    }
+
+    .report-image,
+    .admin-section .report-image {
+        width: 35px;
+        height: 35px;
+        border-radius: 8px;
+    }
+
+
+    /* Text */
+
+    .report-name strong,
+    .admin-section .report-name strong {
+        max-width: 170px;
+        font-size: 0.72rem;
+    }
+
+    .report-name small,
+    .admin-section .report-name small {
+        font-size: 0.58rem;
+    }
+
+
+    /* Buttons */
+
+    td .view-btn,
+    td .resolve-btn,
+    td .resolved-btn {
+        min-width: 90px;
+        min-height: 33px;
+
+        padding: 7px 10px;
+
+        font-size: 10px;
+    }
+
+
+    /* Quick actions */
+
+    .quick-actions button > i {
+        width: 34px;
+        height: 34px;
+    }
+
+    .quick-actions strong {
+        font-size: 0.67rem;
+    }
+
+    .quick-actions small {
+        font-size: 0.59rem;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .sidebar {
+        width: 52px;
+    }
+
+    .main-content {
+        width: calc(100% - 52px);
+        margin-left: 52px;
+    }
+
+    .sidebar-nav a,
+    .sidebar-bottom a,
+    .sidebar-bottom button {
+        width: 40px;
+        height: 40px;
+    }
+
+    .logo-icon {
+        width: 35px;
+        height: 35px;
+    }
+
+    .dashboard,
+    .admin-section {
+        padding: 18px 8px;
+    }
+
+    .welcome h1,
+    .section-header h1 {
+        font-size: 1.4rem;
+    }
+
+    .topbar {
+        padding: 0 7px;
+    }
+
+    .admin-profile strong {
+        display: none;
+    }
+
+    .profile-avatar {
+        width: 32px;
+        height: 32px;
+    }
+
+    tbody tr {
+        padding: 11px 8px;
+    }
+
+    tbody td {
+        font-size: 0.67rem;
+    }
+
+    .report-name strong,
+    .admin-section .report-name strong {
+        max-width: 135px;
+    }
+
+    td .view-btn,
+    td .resolve-btn,
+    td .resolved-btn {
+        min-width: 82px;
+        padding: 6px 8px;
+        font-size: 9px;
+    }
+}
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.admin-layout,
+.main-content,
+.dashboard,
+.admin-section,
+.reports-card,
+.quick-card {
+    max-width: 100%;
+    overflow-x: hidden;
 }

@@ -754,6 +754,7 @@ select {
 .cta-btn:hover {
     transform: translateY(-3px);
 }
+
 .footer {
     background: #111221;
     color: white;
@@ -765,9 +766,11 @@ select {
     gap: 60px;
     padding: 60px 0;
 }
- .footer-brand span{
+
+.footer-brand span {
     color: #ffffff;
- }
+}
+
 .footer-brand p {
     max-width: 350px;
     color: #9697a8;
@@ -809,16 +812,7 @@ select {
     color: #77788a;
     font-size: 0.75rem;
 }
-html,
-body {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-}
 
-* {
-    box-sizing: border-box;
-}
 img {
     max-width: 100%;
     height: auto;
@@ -826,7 +820,6 @@ img {
 }
 
 
-/* Main containers */
 .container,
 section,
 main,
@@ -835,8 +828,6 @@ footer {
     max-width: 100%;
 }
 
-
-/* Report sections */
 #lostItemsContainer,
 #foundItemsContainer,
 #resolvedItemsContainer {
@@ -845,8 +836,6 @@ footer {
     min-width: 0;
 }
 
-
-/* Cards */
 .item-card {
     width: 100%;
     max-width: 100%;
@@ -854,8 +843,6 @@ footer {
     overflow: hidden;
 }
 
-
-/* Card images */
 .item-image {
     width: 100%;
     max-width: 100%;
@@ -869,8 +856,6 @@ footer {
     object-fit: cover;
 }
 
-
-/* Card content */
 .item-card-content {
     width: 100%;
     max-width: 100%;
@@ -889,16 +874,12 @@ footer {
     word-break: break-word;
 }
 
-
-/* Long text should not push the page */
 .item-description {
     max-width: 100%;
     overflow-wrap: anywhere;
     word-break: break-word;
 }
 
-
-/* Meta information */
 .item-meta {
     max-width: 100%;
     min-width: 0;
@@ -919,10 +900,6 @@ footer {
 }
 
 
-/* ==========================================
-   ITEM CARD
-========================================== */
-
 .item-card {
     background: var(--white);
     border: 1px solid var(--border);
@@ -939,11 +916,6 @@ footer {
     box-shadow: 0 20px 45px rgba(35, 34, 70, 0.13);
     border-color: rgba(99, 91, 255, 0.25);
 }
-
-
-/* ==========================================
-   ITEM IMAGE
-========================================== */
 
 .item-image {
     width: 100%;
@@ -965,8 +937,6 @@ footer {
     transform: scale(1.05);
 }
 
-
-/* No image */
 .item-image.no-image {
     display: flex;
     align-items: center;
@@ -980,20 +950,10 @@ footer {
     opacity: 0.55;
 }
 
-
-/* ==========================================
-   CARD CONTENT
-========================================== */
-
 .item-card-content {
     padding: 20px;
     min-width: 0;
 }
-
-
-/* ==========================================
-   TITLE + BADGE
-========================================== */
 
 .item-card-top {
     display: flex;
@@ -1012,11 +972,6 @@ footer {
     overflow-wrap: anywhere;
 }
 
-
-/* ==========================================
-   BADGES
-========================================== */
-
 .item-badge {
     display: inline-flex;
     align-items: center;
@@ -1029,34 +984,23 @@ footer {
     flex-shrink: 0;
 }
 
-
-/* Lost */
 .lost-badge {
     color: var(--red);
     background: var(--red-light);
     border: 1px solid rgba(239, 91, 100, 0.15);
 }
 
-
-/* Found */
 .found-badge {
     color: var(--green);
     background: var(--green-light);
     border: 1px solid rgba(22, 163, 106, 0.15);
 }
 
-
-/* Resolved */
 .resolved-badge {
     color: var(--primary);
     background: var(--primary-light);
     border: 1px solid rgba(99, 91, 255, 0.15);
 }
-
-
-/* ==========================================
-   META INFORMATION
-========================================== */
 
 .item-meta {
     display: flex;
@@ -1084,29 +1028,18 @@ footer {
     font-size: 14px;
 }
 
-
-/* ==========================================
-   DESCRIPTION
-========================================== */
-
 .item-description {
     color: var(--text);
     font-size: 14px;
     line-height: 1.7;
     margin: 0 0 18px;
     overflow-wrap: anywhere;
-
-    /* Keep cards neat */
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
-
-/* ==========================================
-   FOOTER
-========================================== */
 
 .item-footer {
     padding-top: 15px;
@@ -1121,20 +1054,14 @@ footer {
     gap: 7px;
 }
 
-
-/* Lost footer */
 .item-footer .bi-search {
     color: var(--red);
 }
 
-
-/* Found footer */
 .item-footer .bi-info-circle {
     color: var(--green);
 }
 
-
-/* Recovered */
 .recovered-label {
     color: var(--green) !important;
     font-weight: 600;
@@ -1143,11 +1070,6 @@ footer {
 .recovered-label i {
     color: var(--green);
 }
-
-
-/* ==========================================
-   EMPTY STATE
-========================================== */
 
 .empty-state {
     width: 100%;
@@ -1194,11 +1116,6 @@ footer {
     line-height: 1.6;
 }
 
-
-/* ==========================================
-   EMPTY BUTTONS
-========================================== */
-
 .empty-btn {
     display: inline-flex;
     align-items: center;
@@ -1225,11 +1142,6 @@ footer {
 .found-btn:hover {
     background: #128957;
 }
-
-
-/* ==========================================
-   RESPONSIVE
-========================================== */
 
 @media (max-width: 768px) {
 
@@ -1436,11 +1348,54 @@ footer {
 }
 
 @media (max-width: 700px) {
+    /* .nav-links {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .nav-actions {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+    }
 
     .container {
         width: 90%;
+    } */
+    
+
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
     }
 
+    .nav-links {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-wrap: wrap;
+        gap: 12px 18px;
+    }
+
+    .nav-actions {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+.navbar{
+    text-align: center;
+}
     .nav-container {
         min-height: 68px;
     }
@@ -1448,6 +1403,7 @@ footer {
     .nav-links,
     .nav-actions {
         display: none;
+        text-align: center;
     }
 
     .menu-btn {
@@ -1457,6 +1413,7 @@ footer {
     .mobile-menu {
         top: 68px;
     }
+
     .hero {
         padding: 60px 0;
     }
@@ -1534,6 +1491,7 @@ footer {
         left: 0;
         bottom: 25px;
     }
+
     .stats-section {
         padding: 25px 0;
     }
@@ -1561,6 +1519,7 @@ footer {
     .stat-card p {
         font-size: 0.68rem;
     }
+
     .search-section,
     .items-section,
     .how-section {
@@ -1579,6 +1538,7 @@ footer {
     .search-btn {
         grid-column: auto;
     }
+
     .section-top {
         align-items: flex-start;
         flex-direction: column;
@@ -1592,6 +1552,7 @@ footer {
     .items-grid {
         grid-template-columns: 1fr;
     }
+
     .steps-grid {
         grid-template-columns: 1fr;
     }
@@ -1599,21 +1560,75 @@ footer {
     .step-card {
         padding: 25px;
     }
+
     .cta-section {
         padding: 65px 0;
     }
+
     .footer-container {
-        grid-template-columns: 1fr;
         gap: 35px;
         padding: 45px 0;
+        text-align: center;
+    }
+ .footer-brands {
+        text-align: center;
+    }
+    .footer-links {
+        text-align: center;
+    }
+}
+@media (max-width: 700px) {
+
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 35px;
+    }
+    .footer-brand {
+        width: 100%;
+        text-align: center;
     }
 
+    .footer-brand .logo {
+        justify-content: center;
+    }
+
+    .footer-brand p {
+        max-width: 400px;
+        margin: 10px auto 0;
+    }
     .footer-links {
-        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        text-align: center;
+        gap: 45px;
+        flex-wrap: wrap;
+    }
+
+    .footer-links > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-links h4 {
+        margin-bottom: 10px;
+    }
+
+    .footer-bottom {
+        text-align: center;
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 420px) {
+    .footer-links {
+        justify-content: center;
+        gap: 25px;
+    }
 
     .logo {
         font-size: 1.35rem;

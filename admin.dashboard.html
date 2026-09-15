@@ -1,70 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Admin Dashboard | Lost & Found</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="admin-dashboard.css">
-
 </head>
-
-
 <body>
-
     <div class="admin-layout">
         <nav class="sidebar-menu">
             <a
                 href="#"
                 class="nav-link active"
-                data-section="dashboard"
-            >
+                data-section="dashboard" >
                 <i class="fa-solid fa-chart-line"></i>
                 <span>Dashboard</span>
             </a>
-
-
-            <a
-                href="#"
-                class="nav-link"
-                data-section="reports"
-            >
+            <a href="#" class="nav-link" data-section="reports">
                 <i class="fa-solid fa-file-lines"></i>
                 <span>Reports</span>
             </a>
-
-
-            <a
-                href="#"
-                class="nav-link"
-                data-section="users"
-            >
+            <a href="#" class="nav-link"  data-section="users">
                 <i class="fa-solid fa-users"></i>
                 <span>Users</span>
             </a>
-
-
             <a
                 href="#"
                 class="nav-link"
-                data-section="lost"
-            >
+                data-section="lost" >
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <span>Lost Items</span>
             </a>
@@ -80,11 +47,9 @@
             </a>
 
 
-            <a
-                href="#"
+            <a href="#"
                 class="nav-link"
-                data-section="resolved"
-            >
+                data-section="resolved" >
                 <i class="fa-solid fa-circle-check"></i>
                 <span>Resolved</span>
             </a>
@@ -111,9 +76,7 @@
                     </div>
                 </div>
             </header>
-            <section
-                id="dashboardSection"
-                class="admin-section dashboard">
+            <section id="dashboardSection" class="admin-section dashboard">
                 <div class="welcome">
                     <div>
                         <span>
@@ -203,171 +166,89 @@
 
                 </div>
 
-
-
-                <!-- ==========================================
-                     DASHBOARD CONTENT
-                ========================================== -->
-
                 <div class="content-grid">
-
-
-                    <!-- RECENT REPORTS -->
-
                     <div class="reports-card">
-
-
                         <div class="card-header">
-
                             <div>
-
                                 <span>
                                     REPORT MANAGEMENT
                                 </span>
-
                                 <h2>
                                     Recent Reports
                                 </h2>
-
                             </div>
-
-
                             <button id="viewAllReportsBtn">
-
                                 View All
-
                                 <i class="fa-solid fa-arrow-right"></i>
-
                             </button>
-
                         </div>
-
-
-
                         <div class="table-wrapper">
-
                             <table>
-
                                 <thead>
-
                                     <tr>
-
                                         <th>
                                             Report
                                         </th>
-
                                         <th>
                                             Category
                                         </th>
-
                                         <th>
                                             Type
                                         </th>
-
                                         <th>
                                             Status
                                         </th>
-
                                         <th>
                                             Action
                                         </th>
-
                                     </tr>
-
                                 </thead>
-
-
                                 <tbody id="reportsTable">
-
                                     <tr>
-
                                         <td
                                             colspan="5"
-                                            class="empty"
-                                        >
+                                            class="empty">
                                             No reports found.
                                         </td>
-
                                     </tr>
-
                                 </tbody>
-
                             </table>
-
                         </div>
-
                     </div>
-
-
-
-                    <!-- ==========================================
-                         QUICK ACTIONS
-                    ========================================== -->
-
                     <div class="quick-card">
-
-
                         <div class="card-header">
-
                             <div>
-
                                 <span>
                                     QUICK ACTIONS
                                 </span>
-
                                 <h2>
                                     Manage Portal
                                 </h2>
-
                             </div>
-
                         </div>
-
-
-
                         <div class="quick-actions">
-
-
                             <button id="allReportsBtn">
-
                                 <i class="fa-solid fa-file-lines"></i>
-
                                 <div>
-
                                     <strong>
                                         All Reports
                                     </strong>
-
                                     <small>
                                         Manage submitted reports
                                     </small>
-
                                 </div>
-
                             </button>
-
-
-
                             <button id="usersBtn">
-
                                 <i class="fa-solid fa-users"></i>
-
                                 <div>
-
                                     <strong>
                                         Users
                                     </strong>
-
                                     <small>
                                         Manage registered users
                                     </small>
-
                                 </div>
-
                             </button>
-
-
-
                             <button id="resolvedBtn">
 
                                 <i class="fa-solid fa-circle-check"></i>
@@ -395,126 +276,65 @@
                 </div>
 
             </section>
-
-
-
-            <!-- ==========================================
-                 REPORTS SECTION
-            ========================================== -->
-
-            <section
-                id="reportsSection"
-                class="admin-section"
-                style="display: none;"
-            >
-
+            <section id="reportsSection" class="admin-section"  style="display: none;">
                 <div class="section-header">
-
                     <div>
-
                         <span>
                             REPORT MANAGEMENT
                         </span>
-
                         <h1>
                             All Reports
                         </h1>
-
                         <p>
                             Manage all submitted lost and found reports.
                         </p>
-
                     </div>
-
                 </div>
-
-
                 <div class="reports-card">
-
                     <div class="table-wrapper">
-
                         <table>
-
                             <thead>
-
                                 <tr>
-
                                     <th>
                                         Report
                                     </th>
-
                                     <th>
                                         Category
                                     </th>
-
                                     <th>
                                         Type
                                     </th>
-
                                     <th>
                                         Status
                                     </th>
-
                                     <th>
                                         Action
                                     </th>
-
                                 </tr>
-
                             </thead>
-
-
                             <tbody id="allReportsTable">
-
                                 <tr>
-
-                                    <td
-                                        colspan="5"
-                                        class="empty"
-                                    >
+                                    <td colspan="5" class="empty">
                                         Loading reports...
                                     </td>
-
                                 </tr>
-
                             </tbody>
-
                         </table>
-
                     </div>
-
                 </div>
-
             </section>
-
-
-
-            <!-- ==========================================
-                 USERS SECTION
-            ========================================== -->
-
-            <section
-                id="usersSection"
-                class="admin-section"
-                style="display: none;"
-            >
-
+            <section id="usersSection" class="admin-section" style="display: none;">
                 <div class="section-header">
-
                     <div>
-
                         <span>
                             USER MANAGEMENT
                         </span>
-
                         <h1>
                             Registered Users
                         </h1>
-
                         <p>
                             View users registered on the portal.
                         </p>
-
                     </div>
 
                 </div>
